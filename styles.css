@@ -143,3 +143,13 @@ body.calm-mode *, body.calm-mode *::before, body.calm-mode *::after { animation-
 @media (max-width: 950px) { .discovery-layout { grid-template-columns: 1fr; }.site-panel { min-height: 0; }.lunar-records { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 720px) { .discovery-section { width: min(100% - 32px, 560px); padding: 76px 0 84px; }.discovery-heading { display: block; }.discovery-heading .section-intro { margin-top: 19px; }.discovery-layout { margin-top: 31px; }.lunar-map-card { padding: 15px; }.lunar-map { min-height: 350px; }.map-marker { width: 27px; height: 27px; }.site-panel { padding: 24px; }.lunar-explorer { margin-top: 42px; }.lunar-explorer-top { align-items: flex-start; flex-direction: column; gap: 8px; }.lunar-controls { align-items: stretch; flex-direction: column; }.lunar-records { grid-template-columns: repeat(2, 1fr); }.lunar-record-card { min-height: 200px; padding: 14px; }.lunar-record-top { flex-direction: column; gap: 4px; }.map-note { max-width: 110px; text-align: right; } }
 @media (max-width: 410px) { .lunar-records { grid-template-columns: 1fr; }.lunar-record-card { min-height: 160px; } }
+
+
+/* Explicit lunar record actions */
+.lunar-record-select { width: 100%; min-height: 132px; padding: 0; display: flex; flex: 1; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 12px; border: 0; color: var(--ink); background: transparent; text-align: left; }
+.lunar-record-select:focus-visible { outline-offset: 2px; }
+.lunar-record-select strong { align-self: flex-start; font-family: 'Baloo 2'; font-size: 21px; line-height: 1.02; letter-spacing: -.03em; }
+.lunar-record-select > span:not(.lunar-record-top) { color: var(--ink-soft); font-size: 11px; font-weight: 700; }
+.lunar-record-link { align-self: flex-start; color: var(--ink); font-size: 10px; font-weight: 900; text-decoration: none; border-bottom: 2px solid var(--yellow); }
+.lunar-record-link:hover { color: var(--coral); }
+@media (max-width: 720px) { .lunar-record-select { min-height: 126px; } }
