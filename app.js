@@ -205,11 +205,10 @@ function renderLunarRecords() {
   });
   $('#lunarRecords').innerHTML = matches.map((record) => {
     const site = lunarSites.find((item) => item.id === record.site);
-    return `<button class="lunar-record-card ${state.selectedRecord === record.id ? 'is-selected' : ''}" data-record-id="${record.id}" type="button"><span class="lunar-record-top"><span>${record.mission} · ${record.year}</span><b>${recordLabel(record.category)}</b></span><strong>${record.title}</strong><span>${record.type} · ${site.name}</span><i>Explore record ↗</i></button>`;
+    return `<button class="lunar-record-card ${state.selectedRecord === record.id ? 'is-selected' : ''}" data-record-id="${record.id}" type="button" aria-pressed="${state.selectedRecord === record.id}"><span class="lunar-record-top"><span>${record.mission} · ${record.year}</span><b>${recordLabel(record.category)}</b></span><strong>${record.title}</strong><span>${record.type} · ${site.name}</span><i>Explore record ↗</i></button>`;
   }).join('');
   $('#lunarEmpty').hidden = matches.length > 0;
   $('#lunarCount').textContent = `${matches.length} of ${lunarRecords.length} records`;
-  $$('.lunar-record-card').forEach((card) => card.addEventListener('click', () => selectLunarRecord(card.dataset.recordId)));
 }
 
 function selectLunarSite(siteId) {
@@ -230,6 +229,8 @@ function selectLunarRecord(recordId) {
   renderLunarMap();
   renderSitePanel();
   renderLunarRecords();
+  window.setTimeout(() => $('#sitePanel').scrollIntoView({ behavior: 'smooth', block: 'center' }), 0);
+  showToast(`Opened ${record.title}.`);
 }
 
 function todayUTC() {
@@ -271,6 +272,10 @@ function bindEvents() {
     renderLunarRecords();
   }));
   $('#lunarSearch').addEventListener('input', (event) => { state.lunarSearch = event.target.value; renderLunarRecords(); });
+  $('#lunarRecords').addEventListener('click', (event) => {
+    const card = event.target.closest('.lunar-record-card');
+    if (card) selectLunarRecord(card.dataset.recordId);
+  });
   $('#clearSite').addEventListener('click', () => { state.lunarSite = null; state.selectedRecord = null; renderLunarMap(); renderSitePanel(); renderLunarRecords(); });
   $$('.mission-step').forEach((button) => button.addEventListener('click', () => { state.storyStep = Number(button.dataset.step); renderStory(); }));
   $('#storyNext').addEventListener('click', () => {
