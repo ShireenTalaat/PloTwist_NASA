@@ -77,6 +77,33 @@ const lunarRecords = [
   { id: 'survey-7', title: 'Surveyor 7 highlands landing', mission: 'Surveyor 7', year: '1968', site: 'tycho', category: 'hardware', type: 'Robotic lander', fact: 'Surveyor 7 reached the rough highlands near Tycho crater and completed the Surveyor series.', surprise: 'The last scout explored one of the rockiest places on the Moon.' }
 ];
 
+const lunarSourceById = {
+  'survey-1': 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1966-045A',
+  'survey-2': 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1966-084A',
+  'survey-3': 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-035A',
+  'survey-4': 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-068A',
+  'survey-5': 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-084A',
+  'survey-6': 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-112A',
+  'survey-7': 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1968-001A',
+  'a12-surveyor-camera': 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-035A',
+  'a12-surveyor-scoop': 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-035A'
+};
+
+const apolloSourceByMission = {
+  'Apollo 11': 'https://www.nasa.gov/mission/apollo-11/',
+  'Apollo 12': 'https://www.nasa.gov/mission/apollo-12/',
+  'Apollo 14': 'https://www.nasa.gov/mission/apollo-14/',
+  'Apollo 15': 'https://www.nasa.gov/mission/apollo-15/',
+  'Apollo 16': 'https://www.nasa.gov/mission/apollo-16/',
+  'Apollo 17': 'https://www.nasa.gov/mission/apollo-17/'
+};
+
+function lunarSource(record) {
+  if (lunarSourceById[record.id]) return lunarSourceById[record.id];
+  const mission = Object.keys(apolloSourceByMission).find((name) => record.mission.includes(name));
+  return apolloSourceByMission[mission] || 'https://nssdc.gsfc.nasa.gov/planetary/lunar/surveyor.html';
+}
+
 const state = { filter: 'all', search: '', storyStep: 0, found: new Set(), lastFocused: null, lunarSearch: '', lunarCategory: 'all', lunarSite: null, selectedRecord: null };
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -187,7 +214,7 @@ function renderSitePanel() {
 function renderRecordDetail(record) {
   state.selectedRecord = record.id;
   const site = lunarSites.find((item) => item.id === record.site);
-  $('#recordDetail').innerHTML = `<span class="record-detail-kicker">${record.mission} · ${record.year} · ${recordLabel(record.category)}</span><h3>${record.title}</h3><p>${record.fact}</p><div class="record-question"><span>Explorer question</span><strong>${record.surprise}</strong></div><a href="https://nssdc.gsfc.nasa.gov/nmc/" target="_blank" rel="noreferrer">Open the NASA catalog record ↗</a>`;
+  $('#recordDetail').innerHTML = `<span class="record-detail-kicker">${record.mission} · ${record.year} · ${recordLabel(record.category)}</span><h3>${record.title}</h3><p>${record.fact}</p><div class="record-question"><span>Explorer question</span><strong>${record.surprise}</strong></div><a href="${lunarSource(record)}" target="_blank" rel="noreferrer">Open this NASA record ↗</a>`;
   $('#recordDetail').classList.add('has-record');
   $('#siteName').textContent = site.name;
   $('#siteMission').textContent = site.short;
@@ -205,7 +232,7 @@ function renderLunarRecords() {
   });
   $('#lunarRecords').innerHTML = matches.map((record) => {
     const site = lunarSites.find((item) => item.id === record.site);
-    return `<article class="lunar-record-card ${state.selectedRecord === record.id ? 'is-selected' : ''}"><button class="lunar-record-select" data-record-id="${record.id}" type="button" aria-pressed="${state.selectedRecord === record.id}"><span class="lunar-record-top"><span>${record.mission} · ${record.year}</span><b>${recordLabel(record.category)}</b></span><strong>${record.title}</strong><span>${record.type} · ${site.name}</span></button><a class="lunar-record-link" href="https://nssdc.gsfc.nasa.gov/nmc/" target="_blank" rel="noreferrer">Open NASA source ↗</a></article>`;
+    return `<article class="lunar-record-card ${state.selectedRecord === record.id ? 'is-selected' : ''}"><button class="lunar-record-select" data-record-id="${record.id}" type="button" aria-pressed="${state.selectedRecord === record.id}"><span class="lunar-record-top"><span>${record.mission} · ${record.year}</span><b>${recordLabel(record.category)}</b></span><strong>${record.title}</strong><span>${record.type} · ${site.name}</span></button><a class="lunar-record-link" href="${lunarSource(record)}" target="_blank" rel="noreferrer">Open NASA source ↗</a></article>`;
   }).join('');
   $('#lunarEmpty').hidden = matches.length > 0;
   $('#lunarCount').textContent = `${matches.length} of ${lunarRecords.length} records`;
