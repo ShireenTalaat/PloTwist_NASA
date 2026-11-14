@@ -1,0 +1,9 @@
+{
+  "name": "plotwist-nasa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PloTwist: Silent Explorers — a NASA Space Apps educational web experience.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

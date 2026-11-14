@@ -1,0 +1,12 @@
+# PloTwist: Silent Explorers — delivery checklist
+
+- [x] **A complete public English website is implemented in HTML, CSS, and JavaScript.** The experience is built independently as a working responsive website for the public repository `PloTwist_NASA`, with primary project content and documentation in English.
+- [x] **The site tells the story of NASA hardware left across the solar system for elementary-school children through age 12.** The narrative uses “silent explorers” and “space archeology” framing instead of presenting a dense technical catalog.
+- [x] **Artifact stories cover the challenge hardware list.** The archive includes Apollo Lunar Modules, Lunar Roving Vehicles, ALSEP scientific packages, Surveyor landers, Sojourner, Spirit and Opportunity, Viking landers, Phoenix, InSight, Dawn, NEAR Shoemaker, Pioneer 10 and 11, Ingenuity, and Kepler.
+- [x] **Each story explains purpose, science, and current status or final resting place in age-appropriate English.** Every archive card opens an accessible field-note drawer with mission, science clue, and “where it is now” copy.
+- [x] **The experience supports exploration by destination, mission era, and story progression.** Children can follow a five-step mission trail, filter the archive by Moon, Mars, or Deep space, and search by machine or mission.
+- [x] **The visual design is colorful, engaging, and interactive.** The interface uses a child-friendly space-archeology visual system, CSS illustrations, progress steps, hover states, logging feedback, and a live signal panel.
+- [x] **At least one NASA data source is used.** Artifact content is grounded in the NASA Space Science Data Coordinated Archive (NSSDCA) Master Catalog and links directly to the public catalog and a specific Apollo 12 NSSDCA record.
+- [x] **NASA’s public `DEMO_KEY` is used.** The live signal panel calls NASA’s Near Earth Object Feed API with `DEMO_KEY`, shows loading and empty states, and gracefully falls back when the demo quota or network is unavailable.
+- [x] **NASA source attribution is visible.** The source section links to NSSDCA and NASA Open APIs; the live card names NASA’s data stream and includes an API source link.
+- [x] **Accessibility and responsive behavior are included.** Semantic landmarks, a skip link, keyboard-operable buttons, visible focus states, readable contrast, live regions, alternative text for the CSS illustration, reduced-motion support, and mobile layouts are implemented.

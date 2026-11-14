@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PloTwist is a colorful NASA space archeology mission for curious explorers up to age 12." />
+    <meta name="theme-color" content="#111a45" />
+    <title>PloTwist: Silent Explorers</title>
+    <link rel="icon" href="/plotwist-logo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to mission content</a>
+    <div class="site-shell">
+      <header class="topbar" aria-label="Primary navigation">
+        <a class="wordmark" href="#top" aria-label="PloTwist home">
+          <span class="wordmark-mark" aria-hidden="true"><span></span><i></i></span>
+          <span>Plo<span>Twist</span></span>
+        </a>
+        <nav class="nav-links">
+          <a href="#mission">Mission</a>
+          <a href="#archive">Archive</a>
+          <a href="#signals">Live signal</a>
+        </nav>
+        <button class="motion-button" id="motionToggle" type="button" aria-pressed="false">
+          <span aria-hidden="true">◌</span> Calm mode
+        </button>
+      </header>
+
+      <main id="main-content">
+        <section class="hero" id="top" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-dot"></span> NASA space archeology club</p>
+            <h1 id="hero-title">Meet the machines that kept exploring <em>after</em> the goodbye.</h1>
+            <p class="hero-lede">Rovers, landers, instruments and deep-space travelers are still part of the story. Follow their trails, discover the science they made possible, and log your first silent explorer.</p>
+            <div class="hero-actions">
+              <button class="primary-button" id="startMission" type="button">Start the mission <span aria-hidden="true">→</span></button>
+              <a class="text-link" href="#archive">Browse the archive <span aria-hidden="true">↘</span></a>
+            </div>
+            <div class="hero-stats" aria-label="Mission summary">
+              <div><strong>3</strong><span>destinations</span></div>
+              <div><strong>14</strong><span>artifact stories</span></div>
+              <div><strong>1</strong><span>curious explorer: you</span></div>
+            </div>
+          </div>
+          <div class="hero-art" aria-label="Illustration of a small rover traveling through a star map" role="img">
+            <div class="star star-a"></div><div class="star star-b"></div><div class="star star-c"></div><div class="star star-d"></div>
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="planet planet-moon"><span>MOON</span></div>
+            <div class="planet planet-mars"><span>MARS</span></div>
+            <div class="rover-illustration"><div class="rover-window"></div><div class="rover-antenna"></div><div class="rover-wheel wheel-left"></div><div class="rover-wheel wheel-right"></div></div>
+            <div class="hero-note note-one"><span>01</span> footprint found</div>
+            <div class="hero-note note-two"><span>!</span> signal: still curious</div>
+            <div class="orbit-label label-moon">a place with no wind</div>
+            <div class="orbit-label label-mars">a planet with stories</div>
+          </div>
+        </section>
+
+        <section class="mission-section" id="mission" aria-labelledby="mission-title">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="eyebrow eyebrow-light">Your field guide</p>
+              <h2 id="mission-title">The silent explorer trail</h2>
+            </div>
+            <p class="section-intro">Every stop unlocks a new clue. You do not need to know the answers first — just notice, wonder, and keep going.</p>
+          </div>
+          <div class="mission-board">
+            <div class="mission-rail" aria-label="Mission steps">
+              <button class="mission-step is-active" type="button" data-step="0"><span>01</span><b>Footprints</b><small>Where did they go?</small></button>
+              <button class="mission-step" type="button" data-step="1"><span>02</span><b>Science</b><small>What did they hear?</small></button>
+              <button class="mission-step" type="button" data-step="2"><span>03</span><b>Wheels</b><small>Who kept moving?</small></button>
+              <button class="mission-step" type="button" data-step="3"><span>04</span><b>Far flyers</b><small>Who never came back?</small></button>
+              <button class="mission-step" type="button" data-step="4"><span>05</span><b>Your log</b><small>Choose a favorite.</small></button>
+            </div>
+            <div class="mission-story" aria-live="polite">
+              <div class="story-kicker"><span id="storyNumber">01</span><span class="story-line"></span><span id="storyDestination">THE MOON</span></div>
+              <h3 id="storyTitle">Start with the footprints.</h3>
+              <p id="storyText">When astronauts left the Moon, they did not take every machine home. Some hardware stayed behind as a time capsule — a snapshot of what humans could build, drive and measure in a place 384,400 kilometers away.</p>
+              <div class="story-footer"><span id="storyHint">Clue: look for the things that became launch pads.</span><button class="small-button" id="storyNext" type="button">Next clue <span aria-hidden="true">→</span></button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="archive-section" id="archive" aria-labelledby="archive-title">
+          <div class="section-heading archive-heading">
+            <div>
+              <p class="eyebrow">Mission archive</p>
+              <h2 id="archive-title">Pick a trail to follow</h2>
+            </div>
+            <p class="section-intro">Tap a card to open a field note. Each note translates real NASA mission history into a story you can carry with you.</p>
+          </div>
+          <div class="archive-controls" aria-label="Archive filters">
+            <div class="filter-group" role="group" aria-label="Filter by destination">
+              <button class="filter-chip is-active" type="button" data-filter="all">All trails</button>
+              <button class="filter-chip" type="button" data-filter="Moon">The Moon</button>
+              <button class="filter-chip" type="button" data-filter="Mars">Mars</button>
+              <button class="filter-chip" type="button" data-filter="Deep space">Deep space</button>
+            </div>
+            <label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">Search the archive</span><input id="archiveSearch" type="search" placeholder="Search a machine or mission" /></label>
+          </div>
+          <div class="archive-grid" id="archiveGrid" aria-live="polite"></div>
+          <p class="empty-state" id="emptyState" hidden>No explorer matches that search yet. Try “Mars”, “rover”, or “Apollo”.</p>
+        </section>
+
+        <section class="signal-section" id="signals" aria-labelledby="signal-title">
+          <div class="signal-glow glow-one"></div><div class="signal-glow glow-two"></div>
+          <div class="signal-copy">
+            <p class="eyebrow eyebrow-light">Live from NASA’s data stream</p>
+            <h2 id="signal-title">A signal from today’s sky</h2>
+            <p>While our silent explorers stay put, the solar system keeps moving. This live card checks NASA’s public API for near-Earth visitors today.</p>
+            <p class="tiny-note"><span class="pulse-dot"></span> Powered by NASA Open APIs · <code>DEMO_KEY</code></p>
+          </div>
+          <div class="live-card" id="liveCard" aria-live="polite">
+            <div class="live-card-top"><span class="live-label"><span class="live-dot"></span> Incoming signal</span><button class="refresh-button" id="refreshSignal" type="button">Refresh <span aria-hidden="true">↻</span></button></div>
+            <div id="liveContent" class="live-content"><div class="loader-orbit" aria-label="Loading NASA data"></div><p>Scanning today’s sky…</p></div>
+          </div>
+        </section>
+
+        <section class="sources-section" id="sources" aria-labelledby="sources-title">
+          <div class="source-stamp" aria-hidden="true"><span>NASA</span><b>DATA<br />FIELD<br />NOTES</b></div>
+          <div>
+            <p class="eyebrow">Built from real mission records</p>
+            <h2 id="sources-title">Wonder is better with a source.</h2>
+            <p class="source-copy">The artifact stories are grounded in NASA’s <strong>Space Science Data Coordinated Archive (NSSDCA)</strong>, a public catalog of spacecraft, experiments and data collections. The live sky signal uses NASA’s public Open APIs.</p>
+            <div class="source-links"><a href="https://nssdc.gsfc.nasa.gov/nmc/" target="_blank" rel="noreferrer">Open the NSSDCA catalog <span aria-hidden="true">↗</span></a><a href="https://api.nasa.gov/" target="_blank" rel="noreferrer">Explore NASA Open APIs <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer"><div class="footer-brand"><span class="wordmark-mark small" aria-hidden="true"><span></span><i></i></span><span>PloTwist</span></div><p>Made for curious minds · NASA Space Apps inspired</p><a href="#top">Back to top ↑</a></footer>
+    </div>
+
+    <aside class="artifact-drawer" id="artifactDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+      <div class="drawer-backdrop" data-close-drawer="true"></div>
+      <div class="drawer-panel">
+        <button class="drawer-close" id="drawerClose" type="button" aria-label="Close field note">×</button>
+        <div class="drawer-art" id="drawerArt" aria-hidden="true"><span class="drawer-planet"></span><span class="drawer-orbit"></span></div>
+        <div class="drawer-meta"><span id="drawerDestination">THE MOON</span><span id="drawerEra">1969</span><span id="drawerStatus">STATUS: RESTING</span></div>
+        <h2 id="drawerTitle">Artifact title</h2>
+        <p class="drawer-callout" id="drawerCallout">A field note for a curious explorer.</p>
+        <div class="drawer-facts"><div><span>Mission</span><p id="drawerMission"></p></div><div><span>Science clue</span><p id="drawerScience"></p></div><div><span>Where it is now</span><p id="drawerResting"></p></div></div>
+        <div class="drawer-actions"><button class="primary-button" id="logDiscovery" type="button">Log this discovery <span aria-hidden="true">+</span></button><a class="text-link" id="drawerSource" href="#" target="_blank" rel="noreferrer">Read the NASA field record ↗</a></div>
+      </div>
+    </aside>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
