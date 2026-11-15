@@ -1,6 +1,6 @@
 # PloTwist: Silent Explorers
 
-PloTwist is a colorful, story-driven NASA Space Apps web experience for curious explorers up to age 12. It turns NASA hardware left on the Moon, Mars, and in deep space into a space-archeology trail: children can follow a mission story, filter artifact field notes, log discoveries, and check a live NASA sky signal.
+PloTwist is a colorful, story-driven NASA Space Apps web experience for curious explorers up to age 12. It turns NASA hardware left on the Moon, Mars, and in deep space into a space-archeology trail.
 
 ## Run locally
 
@@ -10,20 +10,37 @@ npm start
 
 Then open `http://localhost:3000`.
 
-The site intentionally uses no build step or third-party runtime dependency. It is a small HTML, CSS, and JavaScript experience with a zero-dependency Node static server for Preview.
+The site intentionally uses no build step or third-party runtime dependency. It is plain HTML, CSS, and JavaScript with a zero-dependency Node static server.
+
+## Pages
+
+The site uses hash routing so it works on GitHub Pages:
+
+- `#/` — Home and mission trail
+- `#/discover` — Interactive Moon map and 38 lunar records
+- `#/archive` — Searchable mission archive
+- `#/signal` — Live NASA sky signal and source notes
+
+Legacy section links such as `#discoveries`, `#archive`, `#signals`, and `#sources` are mapped to their corresponding pages.
 
 ## NASA data sources
 
-- **NASA Space Science Data Coordinated Archive (NSSDCA):** the primary factual grounding for the spacecraft and experiment field notes. [Open the NSSDCA Master Catalog](https://nssdc.gsfc.nasa.gov/nmc/)
-- **NASA Open APIs:** the live signal panel requests the Near Earth Object Feed endpoint using the public `DEMO_KEY`. If the demo quota or network is unavailable, the interface explains that the signal is shy and keeps the archive usable. [Explore NASA Open APIs](https://api.nasa.gov/)
+- **NASA Space Science Data Coordinated Archive (NSSDCA):** factual grounding for spacecraft, experiments, and lunar records. [Open the NSSDCA Master Catalog](https://nssdc.gsfc.nasa.gov/nmc/)
+- **NASA Open APIs:** the Live Signal page requests the Near-Earth Object Feed. The app reads an optional browser-provided `window.PLOTWIST_NASA_API_KEY` first and retries once with the public `DEMO_KEY` if that request fails. The public GitHub Pages repository does not commit private API credentials into client-side JavaScript.
+- **NASA/JPL Small-Body Database:** used when the live API returns an object-specific record link.
 
-## Experience map
+For local testing with a personal key, copy `nasa-config.example.js` to `nasa-config.js` and set `window.PLOTWIST_NASA_API_KEY`. The app checks that optional file when the Live signal page opens. `nasa-config.js` is ignored by Git. The public GitHub Pages version intentionally falls back to `DEMO_KEY` rather than exposing a private credential.
 
-- **Mission:** five short story steps that introduce footprints, quiet science, Martian wheels, far flyers, and the explorer’s log.
-- **Archive:** searchable cards for the Moon, Mars, and deep-space artifacts named in the challenge brief.
-- **Live signal:** a resilient NASA API panel for today’s near-Earth objects.
-- **Sources:** clear attribution to NASA’s public catalog and API portal.
+## Background sound
+
+The ambient loop is `leberch-ambient-cinematic-628167.mp3`. It is loaded locally, loops quietly at about 30% volume, and stays active while navigating between hash pages. Browsers that block autoplay show a toast asking the explorer to tap, click, or press a key. If the file is unavailable or unsupported, the experience stays silent without breaking.
+
+The Calm mode button now also controls the audio: turning it on fades the sound out and pauses it; turning it off resumes playback when the browser allows it. Reduced-motion preferences are respected separately from the audio control.
+
+## Moon texture
+
+`moon-surface.jpg` is a dependency-free procedural texture generated with Python, NumPy, and Pillow. It uses layered noise, maria, crater rims, ejecta rays, upper-left lighting, and a vignette. The final image is approximately 1500×1000 and under 300 KB.
 
 ## Accessibility notes
 
-The page uses semantic sections and navigation, keyboard-operable controls, visible focus styling, a skip link, `aria-live` updates for dynamic content, reduced-motion support, and a user-facing Calm mode.
+The site uses semantic navigation, keyboard-operable controls, visible focus styling, a skip link, `aria-current` route state, `aria-live` updates for dynamic content, reduced-motion support, and a user-facing sound control.

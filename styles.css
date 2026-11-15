@@ -153,3 +153,48 @@ body.calm-mode *, body.calm-mode *::before, body.calm-mode *::after { animation-
 .lunar-record-link { align-self: flex-start; color: var(--ink); font-size: 10px; font-weight: 900; text-decoration: none; border-bottom: 2px solid var(--yellow); }
 .lunar-record-link:hover { color: var(--coral); }
 @media (max-width: 720px) { .lunar-record-select { min-height: 126px; } }
+
+
+/* Hash-routed pages */
+body[data-page="home"] .discovery-section,
+body[data-page="home"] .archive-section,
+body[data-page="home"] .signal-section,
+body[data-page="home"] .sources-section,
+body[data-page="discover"] .hero,
+body[data-page="discover"] .mission-section,
+body[data-page="discover"] .archive-section,
+body[data-page="discover"] .signal-section,
+body[data-page="discover"] .sources-section,
+body[data-page="archive"] .hero,
+body[data-page="archive"] .mission-section,
+body[data-page="archive"] .discovery-section,
+body[data-page="archive"] .signal-section,
+body[data-page="archive"] .sources-section,
+body[data-page="signal"] .hero,
+body[data-page="signal"] .mission-section,
+body[data-page="signal"] .discovery-section,
+body[data-page="signal"] .archive-section { display: none; }
+body[data-page="discover"] .discovery-section,
+body[data-page="archive"] .archive-section,
+body[data-page="signal"] .signal-section,
+body[data-page="signal"] .sources-section { animation: page-fade .3s ease both; }
+.nav-links a.is-active { color: var(--ink); position: relative; }
+.nav-links a.is-active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -8px; height: 3px; border-radius: 99px; background: var(--coral); }
+#backgroundAudio { display: none; }
+.motion-button[aria-pressed="true"] { color: var(--coral); border-color: var(--coral); }
+@keyframes page-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Realistic procedural Moon surface */
+.lunar-map { min-height: 540px; background-color: #4e5261; background-image: linear-gradient(180deg, rgba(17,26,69,.05), rgba(17,26,69,.42)), url('moon-surface.jpg'); background-position: center; background-size: cover; }
+.lunar-map::before, .lunar-map::after { display: none; }
+.map-grid { opacity: .2; }
+
+@media (max-width: 720px) {
+  .topbar { flex-wrap: wrap; gap: 0 13px; padding: 12px 0 13px; }
+  .wordmark { flex: 1 1 auto; }
+  .motion-button { margin-left: 0; }
+  .nav-links { order: 3; width: 100%; display: flex; justify-content: space-between; gap: 6px; margin: 12px 0 0; padding-top: 10px; border-top: 1px solid var(--line); }
+  .nav-links a { flex: 1; padding: 8px 5px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-soft); font-size: 11px; text-align: center; }
+  .nav-links a.is-active::after { display: none; }
+  .lunar-map { min-height: 460px; }
+}

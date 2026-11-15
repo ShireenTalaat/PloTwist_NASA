@@ -1,0 +1,4 @@
+nasa-config.js
+.env
+.env.*
+!*.example

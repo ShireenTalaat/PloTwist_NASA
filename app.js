@@ -24,16 +24,16 @@ const storySteps = [
 ];
 
 const lunarSites = [
-  { id: 'tranquility', name: 'Mare Tranquillitatis', short: 'Apollo 11', lat: 0.67, lon: 23.47, summary: 'The first human landing site. Eagle’s descent stage and the early science package stayed behind.', clue: 'Look for records about first footprints, quiet instruments and a shiny reflector.' },
-  { id: 'storm', name: 'Oceanus Procellarum', short: 'Apollo 12', lat: -3.01, lon: -23.42, summary: 'A careful landing near Surveyor 3 turned one mission into a robot archaeology visit.', clue: 'Look for the place where astronauts inspected a machine that arrived first.' },
-  { id: 'fra-mauro', name: 'Fra Mauro', short: 'Apollo 14', lat: -3.65, lon: -17.47, summary: 'Antares landed near an ancient crater field, where a small cart helped carry samples.', clue: 'Look for a hand-pulled science helper and a long-distance reflector.' },
-  { id: 'hadley', name: 'Hadley–Apennine', short: 'Apollo 15', lat: 26.13, lon: 3.63, summary: 'Falcon and the first lunar rover explored mountains, a canyon and the Moon’s deeper story.', clue: 'Look for a rover, a heat-flow experiment and a package of patient listeners.' },
-  { id: 'descartes', name: 'Descartes Highlands', short: 'Apollo 16', lat: -9.00, lon: 15.50, summary: 'Orion and its crew explored bright highlands with a rover and an ambitious science station.', clue: 'Look for records made to compare rocks, rays and underground warmth.' },
-  { id: 'taurus', name: 'Taurus–Littrow', short: 'Apollo 17', lat: 20.19, lon: 30.77, summary: 'Challenger landed beside a valley full of clues about the Moon’s volcanic past.', clue: 'Look for the final Apollo rover, a neutron probe and a last set of reflectors.' },
-  { id: 'flamsteed', name: 'Flamsteed crater', short: 'Surveyor 1', lat: -2.45, lon: -43.22, summary: 'Surveyor 1 proved that a soft landing was possible before astronauts tried it.', clue: 'Look for the first robotic scout in this explorer map.' },
-  { id: 'sinus-medii', name: 'Sinus Medii', short: 'Surveyor 5 / 6', lat: 1.41, lon: 23.18, summary: 'Two Surveyor scouts tested lunar soil and photographed a wide, quiet horizon.', clue: 'Look for records that helped engineers trust the ground.' },
-  { id: 'tycho', name: 'Tycho crater', short: 'Surveyor 7', lat: -40.86, lon: -11.08, summary: 'Surveyor 7 reached the rugged highlands near a bright impact crater.', clue: 'Look for the last Surveyor record and the rockiest landing story.' },
-  { id: 'mareserenitatis', name: 'Mare Serenitatis', short: 'Apollo science', lat: 20.00, lon: 30.00, summary: 'A broad lunar sea that helps connect the Apollo 17 instruments to the Moon’s ancient surface.', clue: 'Try the science filter to see what this place helped us measure.' }
+  { id: 'tranquility', storyX: 18, storyY: 42, name: 'Mare Tranquillitatis', short: 'Apollo 11', lat: 0.67, lon: 23.47, summary: 'The first human landing site. Eagle’s descent stage and the early science package stayed behind.', clue: 'Look for records about first footprints, quiet instruments and a shiny reflector.' },
+  { id: 'storm', storyX: 34, storyY: 50, name: 'Oceanus Procellarum', short: 'Apollo 12', lat: -3.01, lon: -23.42, summary: 'A careful landing near Surveyor 3 turned one mission into a robot archaeology visit.', clue: 'Look for the place where astronauts inspected a machine that arrived first.' },
+  { id: 'fra-mauro', storyX: 48, storyY: 68, name: 'Fra Mauro', short: 'Apollo 14', lat: -3.65, lon: -17.47, summary: 'Antares landed near an ancient crater field, where a small cart helped carry samples.', clue: 'Look for a hand-pulled science helper and a long-distance reflector.' },
+  { id: 'hadley', storyX: 66, storyY: 31, name: 'Hadley–Apennine', short: 'Apollo 15', lat: 26.13, lon: 3.63, summary: 'Falcon and the first lunar rover explored mountains, a canyon and the Moon’s deeper story.', clue: 'Look for a rover, a heat-flow experiment and a package of patient listeners.' },
+  { id: 'descartes', storyX: 58, storyY: 52, name: 'Descartes Highlands', short: 'Apollo 16', lat: -9.00, lon: 15.50, summary: 'Orion and its crew explored bright highlands with a rover and an ambitious science station.', clue: 'Look for records made to compare rocks, rays and underground warmth.' },
+  { id: 'taurus', storyX: 79, storyY: 39, name: 'Taurus–Littrow', short: 'Apollo 17', lat: 20.19, lon: 30.77, summary: 'Challenger landed beside a valley full of clues about the Moon’s volcanic past.', clue: 'Look for the final Apollo rover, a neutron probe and a last set of reflectors.' },
+  { id: 'flamsteed', storyX: 21, storyY: 70, name: 'Flamsteed crater', short: 'Surveyor 1', lat: -2.45, lon: -43.22, summary: 'Surveyor 1 proved that a soft landing was possible before astronauts tried it.', clue: 'Look for the first robotic scout in this explorer map.' },
+  { id: 'sinus-medii', storyX: 38, storyY: 25, name: 'Sinus Medii', short: 'Surveyor 5 / 6', lat: 1.41, lon: 23.18, summary: 'Two Surveyor scouts tested lunar soil and photographed a wide, quiet horizon.', clue: 'Look for records that helped engineers trust the ground.' },
+  { id: 'tycho', storyX: 84, storyY: 80, name: 'Tycho crater', short: 'Surveyor 7', lat: -40.86, lon: -11.08, summary: 'Surveyor 7 reached the rugged highlands near a bright impact crater.', clue: 'Look for the last Surveyor record and the rockiest landing story.' },
+  { id: 'mareserenitatis', storyX: 68, storyY: 68, name: 'Mare Serenitatis', short: 'Apollo science', lat: 20.00, lon: 30.00, summary: 'A broad lunar sea that helps connect the Apollo 17 instruments to the Moon’s ancient surface.', clue: 'Try the science filter to see what this place helped us measure.' }
 ];
 
 const lunarRecords = [
@@ -104,7 +104,13 @@ function lunarSource(record) {
   return apolloSourceByMission[mission] || 'https://nssdc.gsfc.nasa.gov/planetary/lunar/surveyor.html';
 }
 
-const state = { filter: 'all', search: '', storyStep: 0, found: new Set(), lastFocused: null, lunarSearch: '', lunarCategory: 'all', lunarSite: null, selectedRecord: null };
+const state = { filter: 'all', search: '', storyStep: 0, found: new Set(), lastFocused: null, lunarSearch: '', lunarCategory: 'all', lunarSite: null, selectedRecord: null, signalLoaded: false, page: 'home' };
+
+let nasaApiKey = String(window.PLOTWIST_NASA_API_KEY || 'DEMO_KEY').trim();
+const BACKGROUND_AUDIO_FILE = 'leberch-ambient-cinematic-628167.mp3';
+const ROUTES = { home: { title: 'PloTwist: Silent Explorers', heading: 'hero-title' }, discover: { title: 'Discover the Moon · PloTwist', heading: 'discovery-title' }, archive: { title: 'Mission Archive · PloTwist', heading: 'archive-title' }, signal: { title: 'Live NASA Signal · PloTwist', heading: 'signal-title' } };
+const LEGACY_ROUTES = { '#top': 'home', '#mission': 'home', '#discoveries': 'discover', '#archive': 'archive', '#signals': 'signal', '#sources': 'signal', '#main-content': 'home' };
+const audioState = { pendingGesture: false, fadeTimer: null };
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
@@ -153,7 +159,6 @@ function openArtifact(id) {
   $('#drawerQuestion').textContent = artifact.question;
   $('#drawerSource').href = artifact.link;
   $('#drawerArt').dataset.accent = artifact.accent;
-  $('#logDiscovery').dataset.artifactId = artifact.id;
   $('#artifactDrawer').classList.add('is-open');
   $('#artifactDrawer').setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
@@ -180,16 +185,13 @@ function recordLabel(category) {
 }
 
 function mapPosition(site) {
-  const left = Math.max(5, Math.min(95, ((site.lon + 180) / 360) * 100));
-  const top = Math.max(8, Math.min(92, ((90 - site.lat) / 180) * 100));
-  return { left: `${left}%`, top: `${top}%` };
+  return { left: `${site.storyX ?? 50}%`, top: `${site.storyY ?? 50}%` };
 }
 
 function renderLunarMap() {
   const map = $('#lunarMap');
   map.innerHTML = `
     <div class="map-grid" aria-hidden="true"></div>
-    <div class="map-crater crater-one" aria-hidden="true"></div><div class="map-crater crater-two" aria-hidden="true"></div><div class="map-crater crater-three" aria-hidden="true"></div>
     <div class="map-label map-label-north" aria-hidden="true">NORTH</div><div class="map-label map-label-south" aria-hidden="true">SOUTH</div>
     ${lunarSites.map((site) => {
       const position = mapPosition(site);
@@ -264,14 +266,37 @@ function todayUTC() {
   return new Date().toISOString().slice(0, 10);
 }
 
+async function requestCosmicFeed(url) {
+  const response = await fetch(url, { signal: AbortSignal.timeout(9000) });
+  if (!response.ok) throw new Error('NASA API unavailable');
+  return response.json();
+}
+
+async function loadOptionalNasaConfig() {
+  if (nasaApiKey !== 'DEMO_KEY') return;
+  try {
+    const response = await fetch('nasa-config.js', { cache: 'no-store' });
+    if (!response.ok) return;
+    const source = await response.text();
+    const match = source.match(/PLOTWIST_NASA_API_KEY\s*=\s*['"]([^'"]+)['"]/);
+    if (match?.[1]) nasaApiKey = match[1].trim();
+  } catch (_) {
+    // This optional local file is intentionally absent on the public static site.
+  }
+}
+
 async function loadCosmicDispatch() {
   const content = $('#liveContent');
   content.innerHTML = '<div class="loader-orbit" aria-label="Loading NASA data"></div><p>Scanning today’s sky…</p>';
   const date = todayUTC();
   try {
-    const response = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${date}&end_date=${date}&api_key=DEMO_KEY`, { signal: AbortSignal.timeout(9000) });
-    if (!response.ok) throw new Error('NASA API unavailable');
-    const data = await response.json();
+    const primary = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${date}&end_date=${date}&api_key=${encodeURIComponent(nasaApiKey)}`;
+    let data;
+    try { data = await requestCosmicFeed(primary); }
+    catch (primaryError) {
+      if (nasaApiKey === 'DEMO_KEY') throw primaryError;
+      data = await requestCosmicFeed(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${date}&end_date=${date}&api_key=DEMO_KEY`);
+    }
     const visitors = Object.values(data.near_earth_objects || {}).flat();
     const closest = [...visitors].sort((a, b) => Number(a.close_approach_data?.[0]?.miss_distance?.lunar || Infinity) - Number(b.close_approach_data?.[0]?.miss_distance?.lunar || Infinity))[0];
     if (!closest) {
@@ -282,7 +307,102 @@ async function loadCosmicDispatch() {
     const size = Math.round(Number(closest.estimated_diameter?.meters?.estimated_diameter_max || 0));
     content.innerHTML = `<h3>${closest.name.replace(/[()]/g, '')}</h3><p>NASA’s feed lists this near-Earth visitor for today. It is not headed for us — it is a reminder that our solar system is always in motion.</p><div class="live-stats"><div class="live-stat"><strong>${distance}</strong><span>Moon distances away</span></div><div class="live-stat"><strong>${size}m</strong><span>estimated max width</span></div></div><a class="live-link" href="${closest.nasa_jpl_url || 'https://api.nasa.gov/'}" target="_blank" rel="noreferrer">Open the JPL record ↗</a>`;
   } catch (error) {
-    content.innerHTML = '<h3>The signal is shy today.</h3><p>The public demo feed is busy or out of reach. The archive is still ready, and the NASA source is waiting when the signal returns.</p><a class="live-link" href="https://api.nasa.gov/" target="_blank" rel="noreferrer">Try NASA Open APIs ↗</a>';
+    content.innerHTML = '<h3>The signal is shy today.</h3><p>NASA’s live sky signal is temporarily out of reach. The archive is still ready, and the source link is waiting when the signal returns.</p><a class="live-link" href="https://api.nasa.gov/" target="_blank" rel="noreferrer">Try NASA Open APIs ↗</a>';
+  }
+}
+
+function routeFromHash() {
+  const hash = window.location.hash || '#/';
+  if (hash.startsWith('#/')) {
+    const route = hash.slice(2).split('/')[0] || 'home';
+    return ROUTES[route] ? route : 'home';
+  }
+  return LEGACY_ROUTES[hash] || 'home';
+}
+
+function navigateTo(route) {
+  window.location.hash = route === 'home' ? '#/' : `#/${route}`;
+}
+
+function closeAnyOverlay() {
+  if ($('#artifactDrawer').classList.contains('is-open')) closeDrawer();
+}
+
+function applyRoute() {
+  const route = routeFromHash();
+  const config = ROUTES[route];
+  state.page = route;
+  document.body.dataset.page = route;
+  document.title = config.title;
+  $$('[data-route-link]').forEach((link) => {
+    const active = link.dataset.routeLink === route;
+    link.classList.toggle('is-active', active);
+    if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+  });
+  closeAnyOverlay();
+  window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  const heading = document.getElementById(config.heading);
+  if (heading) { heading.setAttribute('tabindex', '-1'); window.setTimeout(() => heading.focus({ preventScroll: true }), 30); }
+  if (route === 'signal' && !state.signalLoaded) { state.signalLoaded = true; loadOptionalNasaConfig().then(loadCosmicDispatch); }
+}
+
+function bindRouteLinks() {
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    const legacy = LEGACY_ROUTES[href];
+    if (legacy) { event.preventDefault(); navigateTo(legacy); }
+  });
+  window.addEventListener('hashchange', applyRoute);
+}
+
+function fadeAudio(target, duration = 550) {
+  const audio = $('#backgroundAudio');
+  if (!audio) return;
+  window.clearInterval(audioState.fadeTimer);
+  const start = audio.volume;
+  const started = performance.now();
+  audioState.fadeTimer = window.setInterval(() => {
+    const progress = Math.min(1, (performance.now() - started) / duration);
+    audio.volume = Math.max(0, Math.min(0.3, start + (target - start) * progress));
+    if (progress >= 1) window.clearInterval(audioState.fadeTimer);
+  }, 30);
+}
+
+function startBackgroundAudio() {
+  const audio = $('#backgroundAudio');
+  if (!audio || document.body.classList.contains('calm-mode')) return;
+  audio.src = BACKGROUND_AUDIO_FILE;
+  audio.volume = 0;
+  const attempt = audio.play();
+  if (!attempt || typeof attempt.catch !== 'function') { fadeAudio(0.3); return; }
+  attempt.then(() => { fadeAudio(0.3); audioState.pendingGesture = false; })
+    .catch((error) => {
+      if (error.name === 'NotAllowedError') {
+        audioState.pendingGesture = true;
+        showToast('Tap anywhere to start the background sound');
+      }
+    });
+}
+
+function armAudioGesture() {
+  const resume = () => { if (audioState.pendingGesture) startBackgroundAudio(); };
+  ['pointerdown', 'keydown', 'touchend'].forEach((type) => document.addEventListener(type, resume, { once: true, passive: true }));
+}
+
+function setCalmMode(calm) {
+  const audio = $('#backgroundAudio');
+  document.body.classList.toggle('calm-mode', calm);
+  $('#motionToggle').setAttribute('aria-pressed', String(calm));
+  $('#motionToggle').innerHTML = calm ? '<span aria-hidden="true">◉</span> Sound off' : '<span aria-hidden="true">◌</span> Calm mode';
+  if (calm) {
+    fadeAudio(0, 380);
+    window.setTimeout(() => { if (document.body.classList.contains('calm-mode')) audio.pause(); }, 420);
+    showToast('Background sound off');
+  } else {
+    startBackgroundAudio();
+    showToast('Background sound on');
   }
 }
 
@@ -307,23 +427,14 @@ function bindEvents() {
   $$('.mission-step').forEach((button) => button.addEventListener('click', () => { state.storyStep = Number(button.dataset.step); renderStory(); }));
   $('#storyNext').addEventListener('click', () => {
     if (state.storyStep < storySteps.length - 1) { state.storyStep += 1; renderStory(); }
-    else document.querySelector('#discoveries').scrollIntoView({ behavior: 'smooth' });
+    else navigateTo('discover');
   });
-  $('#startMission').addEventListener('click', () => { state.storyStep = 0; renderStory(); document.querySelector('#discoveries').scrollIntoView({ behavior: 'smooth' }); });
   $('#drawerClose').addEventListener('click', closeDrawer);
   $$('.drawer-backdrop').forEach((backdrop) => backdrop.addEventListener('click', closeDrawer));
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && $('#artifactDrawer').classList.contains('is-open')) closeDrawer(); });
-  $('#logDiscovery').addEventListener('click', () => {
-    const id = $('#logDiscovery').dataset.artifactId;
-    if (!state.found.has(id)) { state.found.add(id); renderArtifacts(); showToast('Discovery logged. Keep following the trail.'); }
-    else showToast('You already logged this explorer. Good memory.');
-  });
-  $('#refreshSignal').addEventListener('click', loadCosmicDispatch);
-  $('#motionToggle').addEventListener('click', () => {
-    const calm = document.body.classList.toggle('calm-mode');
-    $('#motionToggle').setAttribute('aria-pressed', String(calm));
-    $('#motionToggle').innerHTML = calm ? '<span aria-hidden="true">◉</span> Motion paused' : '<span aria-hidden="true">◌</span> Calm mode';
-  });
+  $('#refreshSignal').addEventListener('click', () => { state.signalLoaded = true; loadCosmicDispatch(); });
+  $('#motionToggle').addEventListener('click', () => setCalmMode(!document.body.classList.contains('calm-mode')));
+  bindRouteLinks();
 }
 
 renderArtifacts();
@@ -332,4 +443,6 @@ renderLunarMap();
 renderSitePanel();
 renderLunarRecords();
 bindEvents();
-loadCosmicDispatch();
+armAudioGesture();
+applyRoute();
+startBackgroundAudio();
