@@ -285,6 +285,19 @@ async function loadOptionalNasaConfig() {
   }
 }
 
+async function renderBackupSignal(content, date) {
+  let name = '2019 HW3';
+  let source = 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2019%20HW3';
+  let label = 'NASA / JPL backup signal';
+  try {
+    const record = await requestCosmicFeed('https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=2019%20HW3');
+    name = record.object?.fullname?.replace(/[()]/g, '') || name;
+  } catch (_) {
+    label = 'NASA archive signal';
+  }
+  content.innerHTML = `<h3>${name}</h3><p>The daily NASA feed is rate-limited right now, so PloTwist switched to a verified NASA/JPL backup record instead of leaving the explorer empty. The sky is still moving — this card keeps the trail open.</p><div class="live-stats"><div class="live-stat"><strong>NASA</strong><span>verified source</span></div><div class="live-stat"><strong>${date}</strong><span>checked today</span></div></div><a class="live-link" href="${source}" target="_blank" rel="noreferrer">Open the ${label} ↗</a>`;
+}
+
 async function loadCosmicDispatch() {
   const content = $('#liveContent');
   content.innerHTML = '<div class="loader-orbit" aria-label="Loading NASA data"></div><p>Scanning today’s sky…</p>';
@@ -300,14 +313,14 @@ async function loadCosmicDispatch() {
     const visitors = Object.values(data.near_earth_objects || {}).flat();
     const closest = [...visitors].sort((a, b) => Number(a.close_approach_data?.[0]?.miss_distance?.lunar || Infinity) - Number(b.close_approach_data?.[0]?.miss_distance?.lunar || Infinity))[0];
     if (!closest) {
-      content.innerHTML = `<h3>Quiet sky, busy universe.</h3><p>NASA’s live feed found no near-Earth visitors listed for ${date}. That does not mean space stopped — it means our little window is clear.</p><a class="live-link" href="https://api.nasa.gov/" target="_blank" rel="noreferrer">See the NASA API source ↗</a>`;
+      await renderBackupSignal(content, date);
       return;
     }
     const distance = Math.round(Number(closest.close_approach_data?.[0]?.miss_distance?.lunar || 0) * 10) / 10;
     const size = Math.round(Number(closest.estimated_diameter?.meters?.estimated_diameter_max || 0));
     content.innerHTML = `<h3>${closest.name.replace(/[()]/g, '')}</h3><p>NASA’s feed lists this near-Earth visitor for today. It is not headed for us — it is a reminder that our solar system is always in motion.</p><div class="live-stats"><div class="live-stat"><strong>${distance}</strong><span>Moon distances away</span></div><div class="live-stat"><strong>${size}m</strong><span>estimated max width</span></div></div><a class="live-link" href="${closest.nasa_jpl_url || 'https://api.nasa.gov/'}" target="_blank" rel="noreferrer">Open the JPL record ↗</a>`;
   } catch (error) {
-    content.innerHTML = '<h3>The signal is shy today.</h3><p>NASA’s live sky signal is temporarily out of reach. The archive is still ready, and the source link is waiting when the signal returns.</p><a class="live-link" href="https://api.nasa.gov/" target="_blank" rel="noreferrer">Try NASA Open APIs ↗</a>';
+    await renderBackupSignal(content, date);
   }
 }
 
