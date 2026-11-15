@@ -355,7 +355,7 @@ function applyRoute() {
   closeAnyOverlay();
   window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   const heading = document.getElementById(config.heading);
-  if (heading) { heading.setAttribute('tabindex', '-1'); window.setTimeout(() => heading.focus({ preventScroll: true }), 30); }
+  if (heading) heading.removeAttribute('tabindex');
   if (route === 'signal' && !state.signalLoaded) { state.signalLoaded = true; loadOptionalNasaConfig().then(loadCosmicDispatch); }
 }
 
@@ -365,7 +365,17 @@ function bindRouteLinks() {
     if (!link) return;
     const href = link.getAttribute('href');
     const legacy = LEGACY_ROUTES[href];
-    if (legacy) { event.preventDefault(); navigateTo(legacy); }
+    if (legacy) {
+      event.preventDefault();
+      navigateTo(legacy);
+      return;
+    }
+    if (href.startsWith('#/')) {
+      event.preventDefault();
+      const route = href.slice(2).split('/')[0] || 'home';
+      if (routeFromHash() === route) applyRoute();
+      else navigateTo(ROUTES[route] ? route : 'home');
+    }
   });
   window.addEventListener('hashchange', applyRoute);
 }
